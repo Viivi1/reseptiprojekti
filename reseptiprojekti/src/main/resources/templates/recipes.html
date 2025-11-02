@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+                xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reseptit</title>
+</head>
+<body>
+<h1>Kaikki reseptit</h1>
+    <table>
+        <tr>
+          <th>Nimi</th>
+          <th>Kuvaus</th>
+          <th>Kategoria</th>
+          <th>Pääraaka-aine</th>
+        </tr>
+
+        <tr th:each="recipe : ${recipes}">
+          <td th:text="${recipe.name}">Nimi</td>
+          <td th:text="${recipe.description}">Kuvaus</td>
+          <td th:text="${recipe.category.name}">Kategoria</td>
+          <td th:text="${recipe.mainIngredient.name}">Raaka-aine</td>
+          <td>
+            <a th:href="@{'/edit/' + ${recipe.id}}">Muokkaa</a>
+            </td>
+            <td sec:authorize="hasAuthority('ADMIN')">
+            <a th:href="@{'/delete/' + ${recipe.id}}" onclick="return confirm('Poistetaanko resepti?');">Poista</a>
+          </td>
+    </table>
+<a href="/add">Lisää uusi resepti</a>
+<p>
+  Kirjautunut käyttäjä: <span sec:authentication="name"></span>
+  <a th:href="@{/logout}">Kirjaudu ulos</a>
+</p>
+
+</body>
+</html>
