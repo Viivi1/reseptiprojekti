@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+                xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lisää uusi resepti</title>
+</head>
+<body>
+    <h1>Lisää uusi resepti</h1>
+    <form th:action="@{/addrecipe}" th:object="${recipe}" method="post">
+        <p>Nimi: <input type="text" th:field="*{name}" /></p><br/>
+        <p>Kuvaus: <textarea th:field="*{description}"></textarea></p><br/>
+
+        <p>Kategoria
+        <select id="categoriesDropDown" th:field="*{category}" class="form-control">
+       	<option th:each="category: ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+    	</select></p>
+        </p>
+
+        <p>Pääraaka-aine:
+        <select id="ingredientsDropDown" th:field="*{mainIngredient}" class="form-control">
+        <option th:each="ingredient : ${ingredients}" th:value="${ingredient.id}" th:text="${ingredient.name}"></option>
+        </select>
+        </p>
+        
+        <p><input type="submit" value="Tallenna"></p>
+    </form>
+</body>
+</html>
