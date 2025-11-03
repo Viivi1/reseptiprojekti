@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-ReseptiprojektiApplication<reseptiprojekti>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "backend.reseptiprojekti.ReseptiprojektiApplication",
+            "projectName": "reseptiprojekti",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
