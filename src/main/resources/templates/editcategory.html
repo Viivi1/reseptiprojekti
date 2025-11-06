@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fi" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="UTF-8">
+    <title>Muokkaa kategoriaa</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body>
+    <!-- Navigaatio -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">Reseptisovellus</a>
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item"><a class="nav-link" href="/recipes">Reseptit</a></li>
+                <li class="nav-item"><a class="nav-link" href="/add">Lisää resepti</a></li>
+                <li class="nav-item"><a class="nav-link active" href="/categories">Kategoriat</a></li>
+            </ul>
+            <span class="navbar-text me-3">
+                Käyttäjä: <span sec:authentication="name"></span>
+            </span>
+            <form th:action="@{/logout}" method="post" class="d-inline">
+                <button type="submit" class="btn btn-outline-danger">Kirjaudu ulos</button>
+            </form>
+        </div>
+    </nav>
+
+    <!-- Muokkaus -->
+    <div class="container">
+        <h2>Muokkaa kategoriaa</h2>
+        <form th:action="@{'/editcategory/' + ${category.id}}" th:object="${category}" method="post">
+            <div class="mb-3">
+                <label for="name" class="form-label">Kategorian nimi:</label>
+                <input type="text" id="name" th:field="*{name}" class="form-control" />
+            </div>
+            <button type="submit" class="btn btn-primary">Tallenna muutokset</button>
+        </form>
+    </div>
+</body>
+</html>

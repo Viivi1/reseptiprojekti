@@ -1,19 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fi" xmlns:th="http://www.thymeleaf.org"
+                xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
-    <title>Document</title>
+    <title>Reseptisovellus</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
 </head>
 <body>
-    <h1>Reseptejä</h1>
-    <p>Etusivu</p>
-    <a href="/recipes">Kaikki reseptit listattuna</a>
-    <!--<a href="/categorylist">Category list</a>
-    <p></p>
-        <!-- LOGOUT -->
-    <form th:action="@{/logout}" method="post">
-	<input type="submit" value="Kirjaudu ulos"/>
+    <!-- Navigaatiopalkki -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">Reseptisovellus</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="/recipes">Reseptit</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/add">Lisää resepti</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/categories">Kategoriat</a></li>
+                </ul>
+                <span class="navbar-text me-3">
+                    Käyttäjä: <span sec:authentication="name"></span>
+                </span>
+                <form th:action="@{/logout}" method="post" class="d-inline">
+                    <button type="submit" class="btn btn-outline-danger">Kirjaudu ulos</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Etusivu -->
+    <div class="container">
+        <h2>Tervetuloa reseptisovellukseen!</h2>
+        <p>Valitse ylhäältä haluamasi toiminto.</p>
+    </div>
 </body>
 </html>

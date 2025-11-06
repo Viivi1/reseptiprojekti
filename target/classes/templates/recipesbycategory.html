@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fi" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reseptit kategoriassa</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body>
+    <!-- Navigaatio -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">Reseptisovellus</a>
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item"><a class="nav-link" href="/recipes">Reseptit</a></li>
+                <li class="nav-item"><a class="nav-link" href="/add">Lisää resepti</a></li>
+                <li class="nav-item"><a class="nav-link" href="/categories">Kategoriat</a></li>
+            </ul>
+            <span class="navbar-text me-3">
+                Käyttäjä: <span sec:authentication="name"></span>
+            </span>
+            <form th:action="@{/logout}" method="post" class="d-inline">
+                <button type="submit" class="btn btn-outline-danger">Kirjaudu ulos</button>
+            </form>
+        </div>
+    </nav>
+
+    <!-- Reseptit -->
+    <div class="container">
+        <h2 th:text="'Reseptit kategoriassa: ' + ${selectedCategory}">Kategoria</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nimi</th>
+                    <th>Kuvaus</th>
+                    <th>Pääraaka-aine</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="recipe : ${recipes}">
+                    <td th:text="${recipe.name}">Nimi</td>
+                    <td th:text="${recipe.description}">Kuvaus</td>
+                    <td th:text="${recipe.mainIngredient.name}">Raaka-aine</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

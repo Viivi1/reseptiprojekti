@@ -1,41 +1,63 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-                xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<html lang="fi" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
     <title>Reseptit</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
 </head>
 <body>
-<h1>Kaikki reseptit</h1>
-<p>
-  Kirjautunut käyttäjä: <span sec:authentication="name"></span>
-  </p>
-    <table class="table table-striped">
-        <tr>
-          <th>Nimi</th>
-          <th>Kuvaus</th>
-          <th>Kategoria</th>
-          <th>Pääraaka-aine</th>
-        </tr>
+    <!-- Navigaatiopalkki -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">Reseptisovellus</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="/recipes">Reseptit</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/add">Lisää resepti</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/categories">Kategoriat</a></li>
+                </ul>
+                <span class="navbar-text me-3">
+                    Käyttäjä: <span sec:authentication="name"></span>
+                </span>
+                <form th:action="@{/logout}" method="post" class="d-inline">
+                    <button type="submit" class="btn btn-outline-danger">Kirjaudu ulos</button>
+                </form>
+            </div>
+        </div>
+    </nav>
 
-        <tr th:each="recipe : ${recipes}">
-          <td th:text="${recipe.name}">Nimi</td>
-          <td th:text="${recipe.description}">Kuvaus</td>
-          <td th:text="${recipe.category.name}">Kategoria</td>
-          <td th:text="${recipe.mainIngredient.name}">Raaka-aine</td>
-          <td>
-            <a th:href="@{'/edit/' + ${recipe.id}}">Muokkaa</a>
-            </td>
-            <td sec:authorize="hasAuthority('ADMIN')">
-            <a th:href="@{'/delete/' + ${recipe.id}}" onclick="return confirm('Poistetaanko resepti?');">Poista</a>
-          </td>
-    </table>
-<a href="/add">Lisää uusi resepti</a>
-
-    <form th:action="@{/logout}" method="post">
-    <input type="submit" value="Kirjaudu ulos"/>
-
+    <!-- Reseptilista -->
+    <div class="container">
+        <h2>Kaikki reseptit</h2>
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Nimi</th>
+                    <th>Kuvaus</th>
+                    <th>Kategoria</th>
+                    <th>Pääraaka-aine</th>
+                    <th>Muokkaa</th>
+                    <th sec:authorize="hasAuthority('ADMIN')">Poista</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="recipe : ${recipes}">
+                    <td th:text="${recipe.name}">Nimi</td>
+                    <td th:text="${recipe.description}">Kuvaus</td>
+                    <td th:text="${recipe.category.name}">Kategoria</td>
+                    <td th:text="${recipe.mainIngredient.name}">Raaka-aine</td>
+                    <td>
+                        <a class="btn btn-sm btn-primary" th:href="@{'/edit/' + ${recipe.id}}">Muokkaa</a>
+                    </td>
+                    <td sec:authorize="hasAuthority('ADMIN')">
+                        <a class="btn btn-sm btn-danger" th:href="@{'/delete/' + ${recipe.id}}" onclick="return confirm('Poistetaanko resepti?');">Poista</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>
+
