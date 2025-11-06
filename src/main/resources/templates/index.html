@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
     <title>Document</title>
 </head>
 <body>
     <h1>Reseptejä</h1>
     <p>Etusivu</p>
-    <a href="/recipes">Book list</a>
+    <a href="/recipes">Kaikki reseptit listattuna</a>
     <!--<a href="/categorylist">Category list</a>
     <p></p>
         <!-- LOGOUT -->
     <form th:action="@{/logout}" method="post">
-	<input type="submit" value="Sign Out"/>
+	<input type="submit" value="Kirjaudu ulos"/>
 </body>
 </html>

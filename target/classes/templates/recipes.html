@@ -4,11 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
     <title>Reseptit</title>
 </head>
 <body>
 <h1>Kaikki reseptit</h1>
-    <table>
+<p>
+  Kirjautunut käyttäjä: <span sec:authentication="name"></span>
+  </p>
+    <table class="table table-striped">
         <tr>
           <th>Nimi</th>
           <th>Kuvaus</th>
@@ -29,10 +33,9 @@
           </td>
     </table>
 <a href="/add">Lisää uusi resepti</a>
-<p>
-  Kirjautunut käyttäjä: <span sec:authentication="name"></span>
-  <a th:href="@{/logout}">Kirjaudu ulos</a>
-</p>
+
+    <form th:action="@{/logout}" method="post">
+    <input type="submit" value="Kirjaudu ulos"/>
 
 </body>
 </html>
