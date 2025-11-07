@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Category {
@@ -16,6 +17,7 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id; 
     
+    @NotBlank(message = "Lisää kategorialle nimi")
     private String name;
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "category")

@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="fi" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lisää uusi resepti</title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
 </head>
+
 <body>
     <!-- Navigaatiopalkki -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
@@ -35,6 +37,7 @@
             <div class="mb-3">
                 <label for="name" class="form-label">Nimi:</label>
                 <input type="text" id="name" th:field="*{name}" class="form-control" />
+                <div class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
             </div>
 
             <div class="mb-3">
@@ -45,14 +48,16 @@
             <div class="mb-3">
                 <label for="categoriesDropDown" class="form-label">Kategoria:</label>
                 <select id="categoriesDropDown" th:field="*{category.id}" class="form-select">
-                    <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+                    <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}">
+                    </option>
                 </select>
             </div>
 
             <div class="mb-3">
                 <label for="ingredientsDropDown" class="form-label">Pääraaka-aine:</label>
                 <select id="ingredientsDropDown" th:field="*{mainIngredient.id}" class="form-select">
-                    <option th:each="ingredient : ${ingredients}" th:value="${ingredient.id}" th:text="${ingredient.name}"></option>
+                    <option th:each="ingredient : ${ingredients}" th:value="${ingredient.id}"
+                        th:text="${ingredient.name}"></option>
                 </select>
             </div>
 
@@ -60,5 +65,5 @@
         </form>
     </div>
 </body>
-</html>
 
+</html>

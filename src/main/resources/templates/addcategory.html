@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="fi" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
 <head>
     <meta charset="UTF-8">
     <title>Lisää kategoria</title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
 </head>
+
 <body>
     <!-- Navigaatio -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
@@ -32,9 +34,11 @@
             <div class="mb-3">
                 <label for="name" class="form-label">Kategorian nimi:</label>
                 <input type="text" id="name" th:field="*{name}" class="form-control" />
+                <div class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
             </div>
             <button type="submit" class="btn btn-success">Tallenna</button>
         </form>
     </div>
 </body>
+
 </html>

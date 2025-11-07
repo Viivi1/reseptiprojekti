@@ -8,4 +8,5 @@ public interface RecipeRepository extends CrudRepository<Recipe, Long> {
     List<Recipe> findByCategoryName(String name);
     List<Recipe> findByMainIngredientName(String name);
     List<Recipe> findByCategory(Category category);
+    List<Recipe> findByName(String name);
 }

@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Recipe {
@@ -13,6 +14,7 @@ public class Recipe {
     @GeneratedValue (strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotBlank(message = "Lisää reseptille nimi")
     private String name;
     private String description;
 
