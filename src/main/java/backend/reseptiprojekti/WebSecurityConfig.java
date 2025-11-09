@@ -32,7 +32,7 @@ http
           .requestMatchers(("/css/**")).permitAll() // Enable css when logged out
           .requestMatchers("/api/**").permitAll()
           .requestMatchers("/error").permitAll()
-          .requestMatchers("/", "/recipes", "/login", "/register").permitAll()
+          .requestMatchers("/", "/login", "/register").permitAll()
           .requestMatchers(toH2Console()).permitAll()
           .anyRequest().authenticated()
     )
@@ -44,6 +44,7 @@ http
                   .disable())
      )
     .formLogin(formlogin -> formlogin
+          .loginPage("/login")
           .defaultSuccessUrl("/", true)
           .permitAll()
      )
