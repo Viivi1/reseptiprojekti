@@ -33,12 +33,8 @@ http
           .requestMatchers("/api/**").permitAll()
           .requestMatchers("/error").permitAll()
           .requestMatchers("/", "/login", "/register").permitAll()
-          .requestMatchers(toH2Console()).permitAll()
           .anyRequest().authenticated()
     )
-     .csrf(csrf -> csrf
-          .ignoringRequestMatchers(toH2Console())
-     )
      .headers(headers -> headers
          .frameOptions(frameoptions -> frameoptions
                   .disable())
