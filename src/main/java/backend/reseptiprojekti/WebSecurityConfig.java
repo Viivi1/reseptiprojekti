@@ -30,6 +30,8 @@ public SecurityFilterChain configure(HttpSecurity http) throws Exception {
 http
     .authorizeHttpRequests( authorize -> authorize
           .requestMatchers(("/css/**")).permitAll() // Enable css when logged out
+          .requestMatchers("/api/**").permitAll()
+          .requestMatchers("/", "/recipes", "/login", "/register").permitAll()
           .requestMatchers(toH2Console()).permitAll()
           .anyRequest().authenticated()
     )
