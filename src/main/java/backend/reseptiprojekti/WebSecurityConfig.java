@@ -31,6 +31,7 @@ http
     .authorizeHttpRequests( authorize -> authorize
           .requestMatchers(("/css/**")).permitAll() // Enable css when logged out
           .requestMatchers("/api/**").permitAll()
+          .requestMatchers("/error").permitAll()
           .requestMatchers("/", "/recipes", "/login", "/register").permitAll()
           .requestMatchers(toH2Console()).permitAll()
           .anyRequest().authenticated()
